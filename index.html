@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPrice AI | Corporate Intelligence</title>
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --dark: #08090d;
+            --glass: rgba(255, 255, 255, 0.07);
+            --text: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+
+        body { background-color: var(--dark); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(8, 9, 13, 0.9); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: 2px; }
+
+        .nav-links a {
+            color: white; text-decoration: none; margin-left: 30px;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .btn-nav { background: linear-gradient(45deg, var(--primary), var(--secondary)); padding: 10px 20px; border-radius: 5px; }
+
+        /* --- LÓGICA DE PÁGINAS --- */
+        .page { display: none; padding: 140px 10% 60px; min-height: 100vh; animation: fadeIn 0.6s ease; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HOME --- */
+        .hero { text-align: center; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 3.8rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2rem; color: #888; margin-bottom: 40px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 50px; }
+        .card { background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(255,255,255,0.1); }
+
+        /* --- FORMULARIO INTEGRADO --- */
+        .contact-container { max-width: 700px; margin: 0 auto; background: var(--glass); padding: 50px; border-radius: 30px; border: 1px solid var(--primary); }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--primary); }
+        
+        input, select, textarea {
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px; color: white; outline: none; transition: 0.3s;
+        }
+
+        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+
+        .btn-send {
+            width: 100%; padding: 15px; border: none; border-radius: 8px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px;
+        }
+
+        .success-msg { display: none; color: #00ff88; margin-top: 20px; font-weight: bold; }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #444; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NEXUSPRICE AI</div>
+        <div class="nav-links">
+            <a onclick="show('home')">Inicio</a>
+            <a onclick="show('services')">Servicios</a>
+            <a onclick="show('pricing')">Planes</a>
+            <a onclick="show('contact')" class="btn-nav">SOLICITAR DEMO</a>
+        </div>
+    </nav>
+
+    <section id="home" class="page active">
+        <div class="hero">
+            <h1>Inteligencia que <span>Optimiza</span> tus Ventas</h1>
+            <p>NexusPrice AI analiza millones de datos para que tu estrategia de precios sea imbatible.</p>
+            <div class="grid">
+                <div class="card"><h3>IA Predictiva</h3><p>Anticípate a los movimientos del mercado.</p></div>
+                <div class="card"><h3>Smart Scraping</h3><p>Monitoreo de competencia en tiempo real.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="page">
+        <h2 style="text-align:center; font-size: 2.5rem;">Nuestras Soluciones</h2>
+        <div class="grid">
+            <div class="card"><h3>Retail Master</h3><p>Gestión masiva de SKUs para grandes superficies.</p></div>
+            <div class="card"><h3>API Nexus</h3><p>Integración directa con tu E-commerce.</p></div>
+            <div class="card"><h3>Market Insights</h3><p>Reportes semanales de tendencias de consumo.</p></div>
+        </div>
+    </section>
+
+    <section id="pricing" class="page">
+        <h2 style="text-align:center; font-size: 2.5rem;">Escala tu Negocio</h2>
+        <div class="grid">
+            <div class="card"><h4>Básico</h4><p>$0/mes - Ideal para pruebas.</p></div>
+            <div class="card" style="border-color: var(--primary);"><h4>Enterprise</h4><p>Customizado - Control total del mercado.</p><button class="btn-send" onclick="show('contact')">Consultar</button></div>
+        </div>
+    </section>
+
+    <section id="contact" class="page">
+        <div class="contact-container">
+            <h2 style="margin-bottom: 10px;">Registro en CRM Inteligente</h2>
+            <p style="margin-bottom: 30px; font-size: 0.9rem; color: #888;">Ingresa tus datos para procesar tu solicitud con nuestra IA.</p>
+            
+            <form id="crmForm">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" placeholder="Ej: Julian Gutierrez" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="julian@empresa.com" required>
+                </div>
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Celular (Opcional)</label>
+                        <input type="tel" placeholder="+57...">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Nivel de Urgencia</label>
+                        <select required>
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Interés Principal (Servicio)</label>
+                    <select required>
+                        <option value="scraping">Web Scraping Masivo</option>
+                        <option value="ia">Análisis de Datos con IA</option>
+                        <option value="crm">Implementación de CRM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cargo o Área</label>
+                    <input type="text" placeholder="Ej: Gerente Comercial">
+                </div>
+                <div class="form-group">
+                    <label>Comentarios Adicionales</label>
+                    <textarea rows="3" placeholder="Cuéntanos más sobre tu proyecto..."></textarea>
+                </div>
+                <button type="submit" class="btn-send">PROCESAR LEAD EN CRM</button>
+            </form>
+            <div id="success" class="success-msg">✓ Datos enviados exitosamente al CRM de NexusPrice AI.</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 NexusPrice AI - Broward International University | Asignación #7</p>
+    </footer>
+
+    <script>
+        // Función para cambiar de página
+        function show(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // Simulación de envío de datos
+        document.getElementById('crmForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-send');
+            btn.innerText = "PROCESANDO POR IA...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                btn.style.display = "none";
+                document.getElementById('success').style.display = "block";
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
